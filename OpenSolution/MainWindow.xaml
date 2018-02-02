@@ -1,0 +1,27 @@
+﻿<Window x:Class="OpenSolution.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenSolution"
+        mc:Ignorable="d"
+        x:Name="window"
+        Title="Open Solution" Height="500" Width="850">
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                <Label Width="auto" DockPanel.Dock="Left">Filter:</Label>
+                <Button MinWidth="70px" DockPanel.Dock="Right" Click="ReloadClicked" IsEnabled="{Binding EnableControls, ElementName=window}">Reload</Button>
+                <TextBox MinWidth="500px" x:Name="filterText" TextChanged="FilterChanged" Text="{Binding Filter, ElementName=window, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding EnableControls, ElementName=window}"></TextBox>
+            </DockPanel>
+            <ListView ItemsSource="{Binding SolutionList, ElementName=window}" SelectedItem="{Binding Selected, ElementName=window}" MouseDoubleClick="SolutionDoubleClicked">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" Header="Path" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</Window>
